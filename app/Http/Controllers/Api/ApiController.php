@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Drivers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ class ApiController extends Controller
      */
     public function index()
     {
+        // Raw sentence
         return DB::table('driver')
             ->select('driver.id', 'driver.fname', 'driver.lname', 'team.team_name', 'team.hex_color')
             ->leftjoin('team', 'driver.team_id', '=', 'team.id')
@@ -32,6 +34,7 @@ class ApiController extends Controller
      */
     public function store(Request $request)
     {
+        // Raw sentence
         return DB::table('driver')
             ->insert([
                 'fname' => $request->fname,
@@ -49,9 +52,11 @@ class ApiController extends Controller
      */
     public function show($id)
     {
+        // Raw sentence
         return DB::table('driver')
             ->where('id',$id)
             ->get();
+
     }
 
     /**
@@ -63,6 +68,7 @@ class ApiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Raw sentence
         return DB::table('driver')
             ->where('id', $id)
             ->update([
@@ -70,6 +76,7 @@ class ApiController extends Controller
                 'lname' => $request->lname,
                 'team_id' => $request->team
             ]);
+
     }
 
     /**
@@ -80,8 +87,10 @@ class ApiController extends Controller
      */
     public function destroy($id)
     {
+        // Raw sentence
         return $deleteDrive = DB::table('driver')
             ->where('id', $id)
             ->delete();
+
     }
 }
