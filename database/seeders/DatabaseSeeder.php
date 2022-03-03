@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use SebastianBergmann\CodeCoverage\Driver\Driver;
 
 class DatabaseSeeder extends Seeder
 {
