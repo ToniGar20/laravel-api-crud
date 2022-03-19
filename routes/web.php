@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('drivers', DriversController::class);
+Route::view('/drivers', 'drivers');

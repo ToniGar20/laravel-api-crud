@@ -34,7 +34,7 @@ function api_js_index() {
                     `<tr>
                 <td>${item.id}</td><td>${item.fname}</td><td>${item.lname}</td><td style="background-color:#${item.hex_color};">${item.team_name}</td>
                 <td>
-                <button class="btn btn-success btn-sm rounded-0" type="submit" onclick="window.location.href='drivers/${item.id}/edit'" title="Edit"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-success btn-sm rounded-0" type="submit" onclick="renderFormEdit(${item.id})" title="Edit"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger btn-sm rounded-0" type="submit" onclick="api_js_destroy(${item.id})" title="Delete"><i class="fa fa-trash"></i></button>
                 </td>
                 </tr>`;
@@ -81,6 +81,7 @@ function api_js_store() {
         .then((data) => {
             console.log(data);
         });
+    renderHome();
 }
 
 function api_js_showValues (id) {
@@ -144,7 +145,7 @@ function api_js_udpate (id) {
         .then((data) => {
             console.log(data);
         });
-
+    renderHome();
 }
 
 function api_js_destroy (id) {
@@ -164,6 +165,85 @@ function api_js_destroy (id) {
             }
         })
             .then((response) => response.json())
-        window.location.reload();
     }
+    renderHome();
+}
+
+
+//HOME display
+function renderHome() {
+    document.getElementById('content').innerHTML = `
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr><th>id</th><th>Name</th><th>Last Name</th><th>Team</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="table-content">
+
+            </tbody>
+        </table>
+    `;
+    api_js_index();
+}
+
+//FORM for ADD displaying
+function renderFormAdd() {
+    document.getElementById('content').innerHTML = `
+        <form method="post" id="add-driver" onsubmit="api_js_store()">
+            <label>
+                Name:
+                <input type="text" name="fname"/>
+            </label>
+            <label>
+                Last Name:
+                <input type="text" name="lname"/>
+            </label>
+            <label for="team">Team:</label>
+
+            <select name="team" id="team">
+                <option value="1">Mercedes AMG F1</option>
+                <option value="2">Scuderia Ferrari</option>
+                <option value="3">Red Bull Racing</option>
+                <option value="4">Renault F1 Team</option>
+                <option value="5">Haas F1 Team</option>
+                <option value="6">Racing Point F1</option>
+                <option value="7">Alpha Tauri F1</option>
+                <option value="8">McLaren F1</option>
+                <option value="9">Alfa Romeo Racing</option>
+                <option value="10">Williams Racing</option>
+            </select>
+            <button class="send-but bg-primary mt-4 text-white btn-md rounded-2 px-3" type="submit">Submit</button>
+        </form>
+    `;
+}
+
+//FORM for EDIT displaying
+function renderFormEdit(id) {
+    document.getElementById('content').innerHTML = `
+        <form id="edit-driver">
+            <label>
+                Name:
+                <input type="text" name="fname" id="fname" value=""/>
+            </label>
+            <label>
+                Last Name:
+                <input type="text" name="lname" id="lname" value=""/>
+            </label>
+            <label for="team">Team:</label>
+
+            <select name="team" id="team">
+                <option value="1" id="1">Mercedes AMG F1</option>
+                <option value="2" id="2">Scuderia Ferrari</option>
+                <option value="3" id="3">Red Bull Racing</option>
+                <option value="4" id="4">Renault F1 Team</option>
+                <option value="5" id="5">Haas F1 Team</option>
+                <option value="6" id="6">Racing Point F1</option>
+                <option value="7" id="7">Alpha Tauri F1</option>
+                <option value="8" id="8">McLaren F1</option>
+                <option value="9" id="9">Alfa Romeo Racing</option>
+                <option value="10" id="10">Williams Racing</option>
+            </select>
+        </form>
+        <button class="send-but bg-primary mt-4 text-white btn-md rounded-2 px-3" onclick="api_js_udpate(${id})">Submit</button>
+    `;
+    api_js_showValues(id);
 }
