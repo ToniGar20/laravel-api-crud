@@ -1,3 +1,4 @@
+
 function api_js_index() {
     // With AJAX
     // const response = new XMLHttpRequest();
@@ -84,7 +85,7 @@ function api_js_store() {
     renderHome();
 }
 
-function api_js_showValues (id) {
+function api_js_showValues(id) {
     // With AJAX
     // const response = new XMLHttpRequest();
     // response.onload = function () {
@@ -109,7 +110,7 @@ function api_js_showValues (id) {
 
 }
 
-function api_js_udpate (id) {
+function api_js_udpate(id) {
     // Grabbing values from the input with FormData Object
     let myForm = document.getElementById('edit-driver');
     let formData = new FormData(myForm), result = { };
@@ -148,7 +149,7 @@ function api_js_udpate (id) {
     renderHome();
 }
 
-function api_js_destroy (id) {
+function api_js_destroy(id) {
     let bol = confirm("Are you sure you want to delete the driver?");
     if (bol) {
         // With AJAX
@@ -169,8 +170,10 @@ function api_js_destroy (id) {
     renderHome();
 }
 
-
 //HOME display
+/**
+ * Function to render a table with the main content called with api_js_index() function
+ */
 function renderHome() {
     document.getElementById('content').innerHTML = `
         <table class="table table-bordered">
@@ -186,6 +189,9 @@ function renderHome() {
 }
 
 //FORM for ADD displaying
+/**
+ * Form is rendered to add a driver
+ */
 function renderFormAdd() {
     document.getElementById('content').innerHTML = `
         <form method="post" id="add-driver" onsubmit="api_js_store()">
@@ -217,6 +223,12 @@ function renderFormAdd() {
 }
 
 //FORM for EDIT displaying
+/**
+ * Form is rendered to edit a driver
+ * To display the data function api_js_showValues(id) is called with the id passed by parameter, identified from button at the main content
+ * @param id
+ */
+
 function renderFormEdit(id) {
     document.getElementById('content').innerHTML = `
         <form id="edit-driver">
@@ -247,3 +259,6 @@ function renderFormEdit(id) {
     `;
     api_js_showValues(id);
 }
+
+
+
